@@ -68,7 +68,7 @@ class _Make8ftPanelCmd:
     def GetResources(self):
         # icon and command information
         return {
-            'Pixmap': __dir__ + '/icons/basic4_makebox_cmd.svg',
+            'Pixmap': __dir__ + '/icons/makebox_cmd.svg',
             'MenuText': '8ft Exterior Panel',
             'ToolTip': 'Create a new 8ft Exterior Panel'}
 
@@ -96,7 +96,7 @@ class _Make8ftInteriorCmd:
     def GetResources(self):
         # icon and command information
         return {
-            'Pixmap': __dir__ + '/icons/basic4_makebox_cmd.svg',
+            'Pixmap': __dir__ + '/icons/makebox_cmd.svg',
             'MenuText': '8ft Interior Panel',
             'ToolTip': 'Create a new 8ft Interior Panel'}
 
@@ -128,7 +128,7 @@ class _Make9ftPanelCmd:
     def GetResources(self):
         # icon and command information
         return {
-            'Pixmap': __dir__ + '/icons/basic4_makebox_cmd.svg',
+            'Pixmap': __dir__ + '/icons/makebox_cmd.svg',
             'MenuText': '9ft Exterior Panel',
             'ToolTip': 'Create a new 9ft Exterior Panel'}
 
