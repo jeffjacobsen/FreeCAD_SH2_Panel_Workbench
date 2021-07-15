@@ -76,6 +76,40 @@ class _Make8ftPanelCmd:
         # The command will be active if there is an active document
         return not FreeCAD.ActiveDocument is None
 
+class _Make8ftWindowCmd:
+
+    def Activated(self):
+        # what is done when the command is clicked
+        MakeBox(48, 5.5, 1.5, 0, 0, 0, "Bottom_Plate")
+        MakeBox(48, 5.5, 1.5, 0, 0, 94.125, "Top_Plate")
+        MakeBox(1.5, 5.5, 81.375, 0, 0, 1.5, "Left_Stud")
+        MakeBox(1.5, 5.5, 81.375, 3, 0, 1.5, "Stud_2")
+        MakeBox(1.5, 5.5, 19.875, 15.5, 0, 1.5, "Cripple_1")
+        MakeBox(1.5, 5.5, 19.875, 31, 0, 1.5, "Cripple_2")
+        MakeBox(1.5, 5.5, 81.375, 43.5, 0, 1.5, "Stud_3")
+        MakeBox(1.5, 5.5, 81.375, 46.5, 0, 1.5, "Right_Stud")
+        MakeBox(48, 1.5, 11.25, 0, 0, 82.875, "Header 1")
+        MakeBox(48, 1.5, 11.25, 0, 4, 82.875, "Header 2")
+        MakeBox(39, 5.5, 1.5, 4.5, 0, 21.375, "Bottom_Frame")
+        MakeBox(11, 1.5, 1.75, 4.5, 4, 10, "Botom_Spacer_1")
+        MakeBox(14, 1.5, 1.75, 17, 4, 10, "Botom_Spacer_2")
+        MakeBox(11, 1.5, 1.75, 32.5, 4, 10, "Botom_Spacer_3")
+        MakeBox(48, 0.75, 96, 0, -0.75, -0.375, "Exterior Plywood", 50) 
+        FreeCADGui.activeDocument().activeView().viewAxonometric()
+        FreeCADGui.SendMsgToActiveView("ViewFit")
+
+
+    def GetResources(self):
+        # icon and command information
+        return {
+            'Pixmap': __dir__ + '/icons/makebox_cmd.svg',
+            'MenuText': '8ft Window Panel',
+            'ToolTip': 'Create a new 8ft Window Panel'}
+
+    def IsActive(self):
+        # The command will be active if there is an active document
+        return not FreeCAD.ActiveDocument is None
+
 class _Make8ftInteriorCmd:
 
     def Activated(self):
@@ -137,5 +171,6 @@ class _Make9ftPanelCmd:
         return not FreeCAD.ActiveDocument is None
 
 FreeCADGui.addCommand('Make_9ft_Exterior', _Make9ftPanelCmd())
+FreeCADGui.addCommand('Make_8ft_Window', _Make8ftWindowCmd())
 FreeCADGui.addCommand('Make_8ft_Exterior', _Make8ftPanelCmd())
 FreeCADGui.addCommand('Make_8ft_Interior', _Make8ftInteriorCmd())
