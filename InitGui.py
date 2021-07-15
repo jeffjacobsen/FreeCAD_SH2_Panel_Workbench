@@ -40,7 +40,8 @@ class Panels_Workbench (Workbench):
         cmdlist = [ "Make_8ft_Exterior",
                     "Make_8ft_Window",
                     "Make_8ft_Interior",
-                    "Make_9ft_Exterior"]
+                    "Make_9ft_Exterior",
+                    "Make_9ft_Interior"]
         self.appendToolbar("Panels", cmdlist)
         self.appendMenu("SH2 Panels", cmdlist)
 
