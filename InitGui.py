@@ -41,7 +41,9 @@ class Panels_Workbench (Workbench):
                     "Make_8ft_Window",
                     "Make_8ft_Interior",
                     "Make_9ft_Exterior",
-                    "Make_9ft_Interior"]
+                    "Make_9ft_Wide_Interior",
+                    "Make_9ft_Interior",
+                    "Make_Stairs"]
         self.appendToolbar("Panels", cmdlist)
         self.appendMenu("SH2 Panels", cmdlist)
 

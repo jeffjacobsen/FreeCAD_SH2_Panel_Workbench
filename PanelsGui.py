@@ -47,6 +47,36 @@ def MakeBox(box_len = 1, box_wid = 1, box_hei = 1, box_x = 0, box_y = 0, box_z =
     Z = FreeCAD.Units.parseQuantity(str(box_z) + 'in')
     box.Placement = FreeCAD.Placement(FreeCAD.Vector(X,Y,Z),FreeCAD.Rotation(FreeCAD.Vector(0,0,1),0))
 
+def MakeStep(step = 0):
+    stepno = str(step + 1)
+    x = 10.5 * step
+    z = 7.5 * step
+    MakeBox(11.25, 42.125, 1.5, x, 0, z+6, "Step_" + stepno)
+    MakeBox(11.25, 42.125, 1.5, x+1.125, 0, z+4.5, "Step_" + stepno + '_Base')
+    MakeBox(0.375, 42.125, 6, x+0.75, 0, z, "Step_" + stepno + '_Front')
+
+
+class _MakeStairsCmd:
+
+    def Activated(self):
+        for step in range(0,15):
+            MakeStep(step)
+        MakeBox(0.375, 42.125, 6, 157.5+0.75, 0, 112.5, "Top_Front")
+        FreeCADGui.activeDocument().activeView().viewAxonometric()
+        FreeCADGui.SendMsgToActiveView("ViewFit")
+
+
+    def GetResources(self):
+        # icon and command information
+        return {
+            'Pixmap': __dir__ + '/icons/makebox_cmd.svg',
+            'MenuText': 'Stairs',
+            'ToolTip': 'Create Stairs'}
+
+    def IsActive(self):
+        # The command will be active if there is an active document
+        return not FreeCAD.ActiveDocument is None
+
 class _Make8ftPanelCmd:
 
     def Activated(self):
@@ -148,9 +178,9 @@ class _Make9ftInteriorCmd:
         MakeBox(1.5, 3.5, 104.625, 15.5, 0, 1.5, "Stud_2")
         MakeBox(1.5, 3.5, 104.625, 31, 0, 1.5, "Stud_3")
         MakeBox(1.5, 3.5, 104.625, 46.5, 0, 1.5, "Right_Stud")
-        MakeBox(14, 3.5, 1.5, 1.5, 4, 11.625, "Botom_Spacer_1")
-        MakeBox(14, 3.5, 1.5, 17, 4, 11.625, "Botom_Spacer_2")
-        MakeBox(14, 3.5, 1.5, 32.5, 4, 11.625, "Botom_Spacer_3") 
+        MakeBox(14, 3.5, 1.5, 1.5, 0, 11.625, "Botom_Spacer_1")
+        MakeBox(14, 3.5, 1.5, 17, 0, 11.625, "Botom_Spacer_2")
+        MakeBox(14, 3.5, 1.5, 32.5, 0, 11.625, "Botom_Spacer_3") 
         MakeBox(48, 0.375, 96, 0, -0.375, 11.625, "Front Beadboard", 50)
         MakeBox(48, 0.375, 96, 0, 3.5, 11.625, "Back Beadboard", 50)   
         FreeCADGui.activeDocument().activeView().viewAxonometric()
@@ -161,12 +191,43 @@ class _Make9ftInteriorCmd:
         # icon and command information
         return {
             'Pixmap': __dir__ + '/icons/makebox_cmd.svg',
-            'MenuText': '9ft Interior Panel',
-            'ToolTip': 'Create a new 9ft Interior Panel'}
+            'MenuText': '9ft 2x4 Interior Panel',
+            'ToolTip': 'Create a new 9ft 2x4 Interior Panel'}
 
     def IsActive(self):
         # The command will be active if there is an active document
         return not FreeCAD.ActiveDocument is None
+
+class _Make9ftWideInteriorCmd:
+
+    def Activated(self):
+        # what is done when the command is clicked
+        MakeBox(48, 5.5, 1.5, 0, 0, 0, "Bottom_Plate")
+        MakeBox(48, 5.5, 1.5, 0, 0, 106.125, "Top_Plate")
+        MakeBox(1.5, 5.5, 104.625, 0, 0, 1.5, "Left_Stud")
+        MakeBox(1.5, 5.5, 104.625, 15.5, 0, 1.5, "Stud_2")
+        MakeBox(1.5, 5.5, 104.625, 31, 0, 1.5, "Stud_3")
+        MakeBox(1.5, 5.5, 104.625, 46.5, 0, 1.5, "Right_Stud")
+        MakeBox(14, 5.5, 1.5, 1.5, 0, 11.625, "Botom_Spacer_1")
+        MakeBox(14, 5.5, 1.5, 17, 0, 11.625, "Botom_Spacer_2")
+        MakeBox(14, 5.5, 1.5, 32.5, 0, 11.625, "Botom_Spacer_3") 
+        MakeBox(48, 0.375, 96, 0, -0.375, 11.625, "Front Beadboard", 50)
+        MakeBox(48, 0.375, 96, 0, 5.5, 11.625, "Back Beadboard", 50)   
+        FreeCADGui.activeDocument().activeView().viewAxonometric()
+        FreeCADGui.SendMsgToActiveView("ViewFit")
+
+
+    def GetResources(self):
+        # icon and command information
+        return {
+            'Pixmap': __dir__ + '/icons/makebox_cmd.svg',
+            'MenuText': '9ft 2x6 Interior Panel',
+            'ToolTip': 'Create a new 9ft 2x6 Interior Panel'}
+
+    def IsActive(self):
+        # The command will be active if there is an active document
+        return not FreeCAD.ActiveDocument is None
+
 
 class _Make9ftPanelCmd:
 
@@ -201,7 +262,10 @@ class _Make9ftPanelCmd:
         return not FreeCAD.ActiveDocument is None
 
 FreeCADGui.addCommand('Make_9ft_Exterior', _Make9ftPanelCmd())
+FreeCADGui.addCommand('Make_9ft_Wide_Interior', _Make9ftWideInteriorCmd())
+FreeCADGui.addCommand('Make_9ft_Interior', _Make9ftInteriorCmd())
 FreeCADGui.addCommand('Make_8ft_Window', _Make8ftWindowCmd())
 FreeCADGui.addCommand('Make_8ft_Exterior', _Make8ftPanelCmd())
 FreeCADGui.addCommand('Make_8ft_Interior', _Make8ftInteriorCmd())
-FreeCADGui.addCommand('Make_8ft_Interior', _Make9ftInteriorCmd())
+FreeCADGui.addCommand('Make_Stairs', _MakeStairsCmd())
+
