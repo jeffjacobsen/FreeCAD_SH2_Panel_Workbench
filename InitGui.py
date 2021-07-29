@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# FreeCAD init script of the Basic 4 module,
-# simple workbench, 4 commands
-
+# FreeCAD init script
+#
+# 2021 - Modified from https://github.com/felipe-m/tutorial_freecad_wb
+#
 #***************************************************************************
 #*   (c) Felipe Machado    https://github.com/felipe-m  2017               *
 #*                                                                         *

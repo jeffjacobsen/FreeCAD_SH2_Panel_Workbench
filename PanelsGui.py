@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-# FreeCAD script for the commands of the basic workbench creation tutorial
-# (c) 2017 Felipe Machado
-
+# FreeCAD script to create modules for Seed Home v2
+# https://wiki.opensourceecology.org/wiki/Seed_Home_v2
+#
+# 2021 - Modified from https://github.com/felipe-m/tutorial_freecad_wb
+#
 #***************************************************************************
 #*   (c) Felipe Machado   2017                                             *
 #*   https://github.com/felipe-m/tutorial_freecad_wb                       *
@@ -25,6 +27,8 @@
 #*   USA                                                                   *
 #*                                                                         *
 #***************************************************************************/
+
+
 import PySide
 from PySide import QtCore, QtGui
 import FreeCAD
