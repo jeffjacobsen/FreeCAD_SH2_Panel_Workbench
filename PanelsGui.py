@@ -50,9 +50,10 @@ def MakeBox(box_len = 1, box_wid = 1, box_hei = 1, box_x = 0, box_y = 0, box_z =
     Z = FreeCAD.Units.parseQuantity(str(box_z) + 'in')
     box.Placement = FreeCAD.Placement(FreeCAD.Vector(X,Y,Z),FreeCAD.Rotation(FreeCAD.Vector(0,0,1),0))
 
-def MakePanel(stud_width, stud_len, panel_width, stud_2_pos, stud_3_pos):
+def MakePanel(stud_width, stud_len, panel_width, stud_2_pos, stud_3_pos, top_plate = 1):
     MakeBox(panel_width, stud_width, 1.5, 0, 0, 0, "Bottom_Plate")
-    MakeBox(panel_width, stud_width, 1.5, 0, 0, stud_len + 1.5, "Top_Plate")
+    if (top_plate > 0):
+        MakeBox(panel_width, stud_width, 1.5, 0, 0, stud_len + 1.5, "Top_Plate")
     MakeBox(1.5, stud_width, stud_len, 0, 0, 1.5, "Left_Stud")
     if (stud_2_pos > 0):
         MakeBox(1.5, stud_width, stud_len, stud_2_pos, 0, 1.5, "Stud_2")
@@ -120,8 +121,10 @@ class _Make8ftPanelCmd:
 class _Make8ftWindowCmd:
 
     def Activated(self):
-        MakePanel(5.5, 81.375, 48, 3 ,43.5)
-        MakeBox(48, 5.5, 1.5, 0, 0, 0, "Bottom_Plate")
+        MakePanel(5.5, 81.375, 48, 3 ,43.5, 0)
+        MakeBox(48, 5.5, 1.5, 0, 0, 94.125, "Top_Plate")
+        MakeBox(1.5, 5.5, 60, 4.5, 0, 22.875, "Trimmer_1")
+        MakeBox(1.5, 5.5, 60, 42, 0, 22.875, "Trimmer_2")
         MakeBox(1.5, 5.5, 19.875, 15.5, 0, 1.5, "Cripple_1")
         MakeBox(1.5, 5.5, 19.875, 31, 0, 1.5, "Cripple_2")
         MakeBox(48, 1.5, 11.25, 0, 0, 82.875, "Header 1")
@@ -130,7 +133,10 @@ class _Make8ftWindowCmd:
         MakeBox(11, 1.5, 1.75, 4.5, 4, 10, "Botom_Spacer_1")
         MakeBox(14, 1.5, 1.75, 17, 4, 10, "Botom_Spacer_2")
         MakeBox(11, 1.5, 1.75, 32.5, 4, 10, "Botom_Spacer_3")
-        MakeBox(48, 0.75, 96, 0, -0.75, -0.375, "Exterior Plywood", 50)
+        MakeBox(48, 0.75, 12.50, 0, -0.75, 83.125, "Exterior_Ply_Top", 50)
+        MakeBox(48, 0.75, 24, 0, -0.75, -0.375, "Exterior_Ply_Bottom", 50)
+        MakeBox(6, 0.75, 59.5, 0, -0.75, 23.625, "Exterior_Ply_Left", 50)
+        MakeBox(6, 0.75, 59.5, 42, -0.75, 23.625, "Exterior_Ply_Right", 50)
         FreeCADGui.activeDocument().activeView().viewAxonometric()
         FreeCADGui.SendMsgToActiveView("ViewFit")
 
